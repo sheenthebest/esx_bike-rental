@@ -11,7 +11,7 @@ AddEventHandler("esx:lowmoney", function(money)
 end)
 
 RegisterServerEvent("esx:addmoney")
-AddEventHandler("esx:lowmoney", function(money)
+AddEventHandler("esx:addmoney", function(money)
     local _source = source	
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	xPlayer.addMoney(money)
