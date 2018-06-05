@@ -62,13 +62,17 @@ Citizen.CreateThread(function()
 						OpenKoloMenu()
 					end 
 				elseif havebike == true then
-					AddTextEntry("FREE_BIKE", _U('storebike'))
+					AddTextEntry("FREE_BIKE", _U('storebike')) 
 					DisplayHelpTextThisFrame("FREE_BIKE",false )
 					if IsControlJustPressed(0,51) then
-						Citizen.Wait(100)  
-						TriggerEvent('esx:deleteVehicle')
-						TriggerEvent("chatMessage", "[Bike Rental]", {255,255,0}, _U('bikemessage'))
-						havebike = false
+						if IsPedOnAnyBike(PlayerPedId()) then
+							Citizen.Wait(100)  
+							TriggerEvent('esx:deleteVehicle')
+							TriggerEvent("chatMessage", "[Bikes]", {255,255,0}, _U('bikemessage'))
+							havebike = false
+						else
+							TriggerEvent("chatMessage", "[Bikes]", {255,255,0}, _U('notabike'))
+						end
 					end 		
 				end
 			elseif dist < 13.80 then
