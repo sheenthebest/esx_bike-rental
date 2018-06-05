@@ -97,6 +97,7 @@ function OpenKoloMenu()
 			{label = _U('bike'), value = 'kolo'},
 			{label = _U('bike2'), value = 'kolo2'},
 			{label = _U('bike3'), value = 'kolo3'}, 
+			{label = _U('bike4'), value = 'kolo4'}, 
 			
 		},
 	},
@@ -121,6 +122,13 @@ function OpenKoloMenu()
 	if data.current.value == 'kolo3' then
 		TriggerEvent('esx:spawnVehicle', "cruiser")
 		TriggerServerEvent("esx:lowmoney", 129) -- number = price
+		ESX.UI.Menu.CloseAll()
+		havebike = true	
+	end
+	
+	if data.current.value == 'kolo4' then
+		TriggerEvent('esx:spawnVehicle', "bmx")
+		TriggerServerEvent("esx:lowmoney", 109) -- number = price
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
