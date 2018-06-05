@@ -9,4 +9,6 @@ Locales['en'] = {
 	['bike3'] = 'Bike - <span style="color:green;">Cruiser</span> <span style="color:red;">129$</span>',
 	
 	['bikemessage'] = 'We hope you enjoyed the ride. Come back later. :)',
+	
+	['notabike'] = 'You are not on the bike!',
 }
