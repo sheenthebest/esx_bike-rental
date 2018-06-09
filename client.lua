@@ -38,6 +38,8 @@ Citizen.CreateThread(function()
 	end
 end)
 
+
+
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
@@ -153,5 +155,13 @@ function OpenBikesMenu()
 		end
 	)
 end
+
+RegisterNetEvent('xyz:clientsaver')
+AddEventHandler('xyz:clientsaver', function()
+	x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true));
+	local PlayerName = GetPlayerName(PlayerId());
+	DisplayBottomLeft("Coords [x]:"..x..", [y]:"..y..", [z]:"..z);
+	TriggerServerEvent("xyz:saver", PlayerName, x , y , z);		
+end)
 
 
