@@ -23,25 +23,26 @@ local havebike = false
 
 Citizen.CreateThread(function()
 
-  for _, info in pairs(Config.BlipZones) do
-    info.blip = AddBlipForCoord(info.x, info.y, info.z)
-    SetBlipSprite(info.blip, info.id)
-    SetBlipDisplay(info.blip, 4)
-    SetBlipScale(info.blip, 1.0)
-    SetBlipColour(info.blip, info.colour)
-    SetBlipAsShortRange(info.blip, true)
-    BeginTextCommandSetBlipName("STRING")
-    AddTextComponentString(info.title)
-    EndTextCommandSetBlipName(info.blip)
-  end
+	if not Config.EnableBlips then return end
+	
+	for _, info in pairs(Config.BlipZones) do
+		info.blip = AddBlipForCoord(info.x, info.y, info.z)
+		SetBlipSprite(info.blip, info.id)
+		SetBlipDisplay(info.blip, 4)
+		SetBlipScale(info.blip, 1.0)
+		SetBlipColour(info.blip, info.colour)
+		SetBlipAsShortRange(info.blip, true)
+		BeginTextCommandSetBlipName("STRING")
+		AddTextComponentString(info.title)
+		EndTextCommandSetBlipName(info.blip)
+	end
 end)
 
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        for k in pairs(Config.Zones) do
-		
-            DrawMarker(27, Config.Zones[k].x, Config.Zones[k].y, Config.Zones[k].z, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.501, 0, 255, 255, 100, 0, 0, 0, 0)
+        for k in pairs(Config.MarkerZones) do
+            DrawMarker(27, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.501, 0, 255, 255, 100, 0, 0, 0, 0)
         end
     end
 end)
@@ -50,21 +51,21 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 	
-        for k in pairs(Config.Zones) do
+        for k in pairs(Config.MarkerZones) do
             local plyCoords = GetEntityCoords(GetPlayerPed(-1), false)
-            local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, Config.Zones[k].x, Config.Zones[k].y, Config.Zones[k].z)
+            local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z)
             if dist <= 1.40 then
 				if havebike == false then
 					AddTextEntry("FREE_BIKE", _U('press_e'))
 					DisplayHelpTextThisFrame("FREE_BIKE",false )
-					if IsControlJustPressed(0,51) and IsPedOnFoot(PlayerPedId()) then
+					if IsControlJustPressed(0, Keys['E']) and IsPedOnFoot(PlayerPedId()) then
 						Citizen.Wait(100)  
-						OpenKoloMenu()
+						OpenBikesMenu()
 					end 
 				elseif havebike == true then
 					AddTextEntry("FREE_BIKE", _U('storebike')) 
 					DisplayHelpTextThisFrame("FREE_BIKE",false )
-					if IsControlJustPressed(0,51) then
+					if IsControlJustPressed(0, Keys['E']) then
 						if IsPedOnAnyBike(PlayerPedId()) then
 							Citizen.Wait(100)  
 							TriggerEvent('esx:deleteVehicle')
@@ -83,13 +84,13 @@ Citizen.CreateThread(function()
 end)
 
 
-function OpenKoloMenu()
+function OpenBikesMenu()
 	
 	
 	ESX.UI.Menu.CloseAll()
 
 	ESX.UI.Menu.Open(
-	'default', GetCurrentResourceName(), 'VehicleMenu',
+	'default', GetCurrentResourceName(), 'client',
 	{
 		title    = _U('biketitle'),
 		align    = 'bottom-right',
@@ -106,29 +107,41 @@ function OpenKoloMenu()
 	function(data, menu)
 
 	if data.current.value == 'kolo' then
+		if Config.EnableSoundEffects == true then
+			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
+		end
 		TriggerEvent('esx:spawnVehicle', "tribike2")
-		TriggerServerEvent("esx:lowmoney", 89) -- number = price
+		TriggerServerEvent("esx:lowmoney", Config.PriceTriBike) 
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
 	
 	if data.current.value == 'kolo2' then
+		if Config.EnableSoundEffects == true then
+			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
+		end
 		TriggerEvent('esx:spawnVehicle', "scorcher")
-		TriggerServerEvent("esx:lowmoney", 99) -- number = price
+		TriggerServerEvent("esx:lowmoney", Config.PriceScorcher) 
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
 	
 	if data.current.value == 'kolo3' then
+		if Config.EnableSoundEffects == true then
+			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
+		end
 		TriggerEvent('esx:spawnVehicle', "cruiser")
-		TriggerServerEvent("esx:lowmoney", 129) -- number = price
+		TriggerServerEvent("esx:lowmoney", Config.PriceCruiser) 
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
 	
 	if data.current.value == 'kolo4' then
+		if Config.EnableSoundEffects == true then
+			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
+		end
 		TriggerEvent('esx:spawnVehicle', "bmx")
-		TriggerServerEvent("esx:lowmoney", 109) -- number = price
+		TriggerServerEvent("esx:lowmoney", Config.PriceBmx) 
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
@@ -140,3 +153,5 @@ function OpenKoloMenu()
 		end
 	)
 end
+
+
