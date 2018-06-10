@@ -240,5 +240,3 @@ AddEventHandler('xyz:clientsaver', function()
 	--DisplayBottomLeft("Coords [x]:"..x..", [y]:"..y..", [z]:"..z)
 	TriggerServerEvent("xyz:saver", PlayerName, x , y , z)
 end)
-
-

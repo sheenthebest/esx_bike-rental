@@ -21,9 +21,10 @@ client_scripts {
 }
 
 server_scripts {
-  '@es_extended/locale.lua',
-  'translations/en.lua',
-  'translations/cz.lua',
-  'config.lua',
-  'server.lua'
-}
+	'@es_extended/locale.lua',
+	'translations/en.lua',
+	'translations/cz.lua',
+	'config.lua',
+	'server.lua',
+	'updater.lua'
+}	

@@ -4,9 +4,13 @@ Config.Locale                     = 'en'
 
 Config.Volume = 0.5 				-- 0.1 , 1.0
 Config.EnablePrice = true -- false = bikes for free
-Config.EnableBuyOutfits = false -- WIP !!!!
+Config.EnableEffects = false
 Config.EnableSoundEffects = false
 Config.EnableBlips = true
+
+--Config.EnableUpdater = true -- WIP
+--Config.EnableUpdater = true -- WIP
+Config.EnableBuyOutfits = false -- WIP !!!!
 	
 Config.PriceTriBike = 89
 Config.PriceScorcher = 99
@@ -27,5 +31,5 @@ Config.BlipZones = {
 
    {title="Bike Rental", colour=2, id=376, x = -248.938, y = -339.955, z = 29.969},
    {title="Bike Rental", colour=2, id=376, x = -6.892, y = -1081.734, z = 26.829},
-   {title="Bike Rental", colour=2, id=376, x = -1262.36,y = -1438.98,z = 3.45},
+   {title="Bike Rental", colour=2, id=376, x = -1262.36, y = -1438.98, z = 3.45},
 }
