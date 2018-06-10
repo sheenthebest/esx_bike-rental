@@ -13,6 +13,8 @@ Locales['cz'] = {
 	['bikemessage'] = 'Doufáme ,že jsi jízdu užil. Děkujeme přidte zas. :)',
 	['notabike'] = 'Nejsi na kole!',
 	
+	['bikes'] = '[Bikes]',
+	
 	['civil_outfit'] = '<span style="color:yellow;">Civilni outfit</span>',
 	['outfit'] = '<span style="color:green;">Bike Outfit</span> <span style="color:red;">200$</span>',
 	['outfit2'] = '<span style="color:green;">Bike Outfit 2</span> <span style="color:red;">200$</span>',

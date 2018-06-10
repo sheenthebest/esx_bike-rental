@@ -71,10 +71,10 @@ Citizen.CreateThread(function()
 						if IsPedOnAnyBike(PlayerPedId()) then
 							Citizen.Wait(100)  
 							TriggerEvent('esx:deleteVehicle')
-							TriggerEvent("chatMessage", "[Bikes]", {255,255,0}, _U('bikemessage'))
+							TriggerEvent("chatMessage", _U('bikes'), {255,255,0}, _U('bikemessage'))
 							havebike = false
 						else
-							TriggerEvent("chatMessage", "[Bikes]", {255,255,0}, _U('notabike'))
+							TriggerEvent("chatMessage", _U('bikes'), {255,255,0}, _U('notabike'))
 						end
 					end 		
 				end
