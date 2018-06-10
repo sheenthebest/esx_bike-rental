@@ -7,7 +7,7 @@
 
 resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
-version 'v3'
+version '4.0'
 
 description 'Esx Bike Rental by sheen - thx for base Woopi/Lucas Miller'
 
