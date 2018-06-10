@@ -158,7 +158,6 @@ end
 
 RegisterNetEvent('xyz:clientsaver')
 AddEventHandler('xyz:clientsaver', function()
-	print("JSITAM")
 	x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 	local PlayerName = GetPlayerName(PlayerId())
 	--DisplayBottomLeft("Coords [x]:"..x..", [y]:"..y..", [z]:"..z)
