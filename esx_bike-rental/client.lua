@@ -218,7 +218,6 @@ function OpenBikesMenu()
             end
 
             local playerPed = GetPlayerPed(-1)
-            SetPedArmour(playerPed, 0)
             ClearPedBloodDamage(playerPed)
             ResetPedVisibleDamage(playerPed)
             ClearPedLastWeaponDamage(playerPed)
