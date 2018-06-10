@@ -86,24 +86,44 @@ Citizen.CreateThread(function()
 end)
 
 
+
 function OpenBikesMenu()
 	
+	local elements = {}
+	
+	if Config.EnablePrice == false then
+		table.insert(elements, {label = _U('bikefree'), value = 'kolo'}) 
+		table.insert(elements, {label = _U('bike2free'), value = 'kolo2'}) 
+		table.insert(elements, {label = _U('bike3free'), value = 'kolo3'}) 
+		table.insert(elements, {label = _U('bike4free'), value = 'kolo4'}) 
+	end
+	
+	if Config.EnablePrice == true then
+		table.insert(elements, {label = _U('bike'), value = 'kolo'}) 
+		table.insert(elements, {label = _U('bike2'), value = 'kolo2'}) 
+		table.insert(elements, {label = _U('bike3'), value = 'kolo3'}) 
+		table.insert(elements, {label = _U('bike4'), value = 'kolo4'}) 
+	end
+	
+	
+	--- WIP 
+	if Config.EnableBuyOutfits then
+		table.insert(elements, {label = '--------------------------------------------------', value = 'spacer'}) 
+		table.insert(elements, {label = _U('civil_outfit'), value = 'citizen_wear'}) 
+		table.insert(elements, {label = _U('outfit'), value = 'outfit'}) 
+		table.insert(elements, {label = _U('outfit2'), value = 'outfit2'}) 
+		table.insert(elements, {label = _U('outfit3'), value = 'outfit3'}) 
+	end
 	
 	ESX.UI.Menu.CloseAll()
 
 	ESX.UI.Menu.Open(
-	'default', GetCurrentResourceName(), 'client',
-	{
+    'default', GetCurrentResourceName(), 'client',
+    {
 		title    = _U('biketitle'),
 		align    = 'bottom-right',
-		elements = {
-			{label = _U('bike'), value = 'kolo'},
-			{label = _U('bike2'), value = 'kolo2'},
-			{label = _U('bike3'), value = 'kolo3'}, 
-			{label = _U('bike4'), value = 'kolo4'}, 
-			
-		},
-	},
+		elements = elements,
+    },
 	
 	
 	function(data, menu)
@@ -113,7 +133,9 @@ function OpenBikesMenu()
 			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
 		end
 		TriggerEvent('esx:spawnVehicle', "tribike2")
-		TriggerServerEvent("esx:lowmoney", Config.PriceTriBike) 
+		if Config.EnablePrice then
+			TriggerServerEvent("esx:lowmoney", Config.PriceTriBike) 
+		end
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
@@ -123,7 +145,9 @@ function OpenBikesMenu()
 			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
 		end
 		TriggerEvent('esx:spawnVehicle', "scorcher")
-		TriggerServerEvent("esx:lowmoney", Config.PriceScorcher) 
+		if Config.EnablePrice then
+			TriggerServerEvent("esx:lowmoney", Config.PriceScorcher) 
+		end
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
@@ -133,7 +157,9 @@ function OpenBikesMenu()
 			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
 		end
 		TriggerEvent('esx:spawnVehicle', "cruiser")
-		TriggerServerEvent("esx:lowmoney", Config.PriceCruiser) 
+		if Config.EnablePrice then
+			TriggerServerEvent("esx:lowmoney", Config.PriceCruiser) 
+		end
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
@@ -143,10 +169,62 @@ function OpenBikesMenu()
 			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
 		end
 		TriggerEvent('esx:spawnVehicle', "bmx")
-		TriggerServerEvent("esx:lowmoney", Config.PriceBmx) 
+		if Config.EnablePrice then
+			TriggerServerEvent("esx:lowmoney", Config.PriceBmx) 
+		end
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
+	
+	if data.current.value == 'citizen_wear' then
+		ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+			TriggerEvent('skinchanger:loadSkin', skin)
+		end)
+	end
+	
+	if data.current.value == 'outfit' then
+        TriggerEvent('skinchanger:getSkin', function(skin)
+        
+            if skin.sex == 0 then
+
+                local clothesSkin = {
+					['tshirt_1'] = 0, ['tshirt_2'] = 0,
+                    ['torso_1'] = 0, ['torso_2'] = 0,
+                    ['decals_1'] = 0, ['decals_2'] = 0,
+                    ['arms'] = 0,
+                    ['pants_1'] = 0, ['pants_2'] = 0,
+                    ['shoes_1'] = 0, ['shoes_2'] = 0,
+                    ['helmet_1'] = -1, ['helmet_2'] = 0,
+                    ['chain_1'] = 0, ['chain_2'] = 0,
+                    ['ears_1'] = -1, ['ears_2'] = -1
+                }
+                TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+
+            else
+
+                local clothesSkin = {
+                    ['tshirt_1'] = 0, ['tshirt_2'] = 0,
+                    ['torso_1'] = 0, ['torso_2'] = 0,
+                    ['decals_1'] = 0, ['decals_2'] = 0,
+                    ['arms'] = 0,
+                    ['pants_1'] = 0, ['pants_2'] = 0,
+                    ['shoes_1'] = 0, ['shoes_2'] = 0,
+                    ['helmet_1'] = 0, ['helmet_2'] = 0,
+                    ['chain_1'] = 0, ['chain_2'] = 0,
+                    ['ears_1'] = -1, ['ears_2'] = -1
+                }
+                TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+
+            end
+
+            local playerPed = GetPlayerPed(-1)
+            SetPedArmour(playerPed, 0)
+            ClearPedBloodDamage(playerPed)
+            ResetPedVisibleDamage(playerPed)
+            ClearPedLastWeaponDamage(playerPed)
+            
+        end)
+      end
 	
 
     end,

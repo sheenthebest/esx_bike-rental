@@ -3,6 +3,8 @@ Config.Locale                     = 'en'
 
 
 Config.Volume = 0.5 				-- 0.1 , 1.0
+Config.EnablePrice = true -- false = bikes for free
+Config.EnableBuyOutfits = true -- WIP !!!!
 Config.EnableSoundEffects = false
 Config.EnableBlips = true
 	
