@@ -10,7 +10,7 @@ Locales['cz'] = {
 	['bike2free'] = 'Bike - <span style="color:green;">Scorcher</span>',
 	['bike3free'] = 'Bike - <span style="color:green;">Cruiser</span>',
 	['bike4free'] = 'Bike - <span style="color:green;">BMX</span>',
-	['bikemessage'] = 'Doufáme ,že jsi jízdu užil. Děkujeme přidte zas. :)',
+	['bikemessage'] = 'Doufáme ,že jste si jízdu užil. Děkujeme přidte zas. :)',
 	['notabike'] = 'Nejsi na kole!',
 	
 	['bikes'] = '[Kola]',
