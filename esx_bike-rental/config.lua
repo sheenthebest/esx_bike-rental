@@ -2,20 +2,20 @@ Config                            = {}
 Config.Locale                     = 'en'
 
 
-Config.Volume = 0.5 				-- 0.1 , 1.0
-Config.EnablePrice = true -- false = bikes for free
-Config.EnableEffects = false
+Config.Volume = 0.5 				-- 0.1 , 1.0 
+Config.EnablePrice = true 			-- false = bikes for free
 Config.EnableSoundEffects = false
 Config.EnableBlips = true
 
---Config.EnableUpdater = true -- WIP
---Config.EnableUpdater = true -- WIP
-Config.EnableBuyOutfits = false -- WIP !!!!
-	
 Config.PriceTriBike = 89
 Config.PriceScorcher = 99
 Config.PriceCruiser = 129
 Config.PriceBmx = 109
+
+-- WIP
+Config.EnableBuyOutfits = false 	
+Config.EnableEffects = false  		
+-- WIP
 
 	
 Config.MarkerZones = { 
