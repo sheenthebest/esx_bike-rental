@@ -78,7 +78,7 @@ Citizen.CreateThread(function()
 						end
 					end 		
 				end
-			elseif dist < 13.80 then
+			elseif dist < 1.45 then
 				ESX.UI.Menu.CloseAll()
             end
         end
