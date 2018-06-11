@@ -27,3 +27,8 @@ AddEventHandler("xyz:saver", function(PlayerName, x, y, z)
 	file:close()
 end)
 
+Citizen.CreateThread(function()
+	Citizen.Wait(5000)
+	local ver = "4.0"
+	print("ESX Bike Rental started v"..ver)
+end)

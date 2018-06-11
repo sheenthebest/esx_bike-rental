@@ -25,6 +25,5 @@ server_scripts {
 	'translations/en.lua',
 	'translations/cz.lua',
 	'config.lua',
-	'server.lua',
-	'updater.lua'
+	'server.lua'
 }	
