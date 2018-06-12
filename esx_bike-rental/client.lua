@@ -165,7 +165,6 @@ function OpenBikesMenu()
 			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceTriBike))
 		end
 		
-		ESX.GetRandomString(5)
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
