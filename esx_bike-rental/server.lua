@@ -29,6 +29,6 @@ end)
 
 Citizen.CreateThread(function()
 	Citizen.Wait(5000)
-	local ver = "4.0"
+	local ver = "4.2"
 	print("ESX Bike Rental started v"..ver)
 end)
