@@ -45,9 +45,11 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         for k in pairs(Config.MarkerZones) do
             DrawMarker(27, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.501, 0, 255, 255, 100, 0, 0, 0, 0)
-        end
+			
+		end
     end
 end)
+
 
 Citizen.CreateThread(function()
     while true do
@@ -69,10 +71,24 @@ Citizen.CreateThread(function()
 					DisplayHelpTextThisFrame("FREE_BIKE",false )
 					if IsControlJustPressed(0, Keys['E']) then
 						if IsPedOnAnyBike(PlayerPedId()) then
-							Citizen.Wait(100)  
-							TriggerEvent('esx:deleteVehicle')
-							TriggerEvent("chatMessage", _U('bikes'), {255,255,0}, _U('bikemessage'))
+							Citizen.Wait(100) 
+							if Config.EnableEffects then
+								DoScreenFadeOut(1000)
+								Citizen.Wait(500)
+								TriggerEvent('esx:deleteVehicle')
+								DoScreenFadeIn(3000) 
+							else
+								TriggerEvent('esx:deleteVehicle')
+							end
+							
+							if Config.EnableEffects then
+								ESX.ShowNotification(_U('bikemessage'))
+							else
+								TriggerEvent("chatMessage", _U('bikes'), {255,255,0}, _U('bikemessage'))
+							end
 							havebike = false
+						elseif Config.EnableEffects then
+							ESX.ShowNotification(_U('notabike'))
 						else
 							TriggerEvent("chatMessage", _U('bikes'), {255,255,0}, _U('notabike'))
 						end
@@ -132,10 +148,22 @@ function OpenBikesMenu()
 		if Config.EnableSoundEffects == true then
 			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
 		end
-		TriggerEvent('esx:spawnVehicle', "tribike2")
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:lowmoney", Config.PriceTriBike) 
 		end
+		
+		if Config.EnableEffects then
+			DoScreenFadeOut(1000)
+			Citizen.Wait(1000)
+			TriggerEvent('esx:spawnVehicle', "tribike2")
+			DoScreenFadeIn(3000) 
+			ESX.ShowNotification(_U('bike_pay', Config.PriceTriBike))
+		else
+			TriggerEvent('esx:spawnVehicle', "tribike2")
+			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceTriBike))
+		end
+		
+		ESX.GetRandomString(5)
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
@@ -144,10 +172,21 @@ function OpenBikesMenu()
 		if Config.EnableSoundEffects == true then
 			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
 		end
-		TriggerEvent('esx:spawnVehicle', "scorcher")
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:lowmoney", Config.PriceScorcher) 
 		end
+		
+		if Config.EnableEffects then
+			DoScreenFadeOut(1000)
+			Citizen.Wait(1000)
+			TriggerEvent('esx:spawnVehicle', "scorcher")
+			DoScreenFadeIn(3000) 
+			ESX.ShowNotification(_U('bike_pay', Config.PriceScorcher))
+		else
+			TriggerEvent('esx:spawnVehicle', "scorcher")
+			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceScorcher))
+		end
+		
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
@@ -156,9 +195,19 @@ function OpenBikesMenu()
 		if Config.EnableSoundEffects == true then
 			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
 		end
-		TriggerEvent('esx:spawnVehicle', "cruiser")
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:lowmoney", Config.PriceCruiser) 
+		end
+		
+		if Config.EnableEffects then
+			DoScreenFadeOut(1000)
+			Citizen.Wait(1000)
+			TriggerEvent('esx:spawnVehicle', "cruiser")
+			DoScreenFadeIn(3000) 
+			ESX.ShowNotification(_U('bike_pay', Config.PriceCruiser))
+		else
+			TriggerEvent('esx:spawnVehicle', "cruiser")
+			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceCruiser))
 		end
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
@@ -168,13 +217,26 @@ function OpenBikesMenu()
 		if Config.EnableSoundEffects == true then
 			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
 		end
-		TriggerEvent('esx:spawnVehicle', "bmx")
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:lowmoney", Config.PriceBmx) 
+		end
+		
+		if Config.EnableEffects then
+			DoScreenFadeOut(1000)
+			Citizen.Wait(1000)
+			TriggerEvent('esx:spawnVehicle', "bmx")
+			DoScreenFadeIn(3000) 
+			ESX.ShowNotification(_U('bike_pay', Config.PriceBmx))
+		else
+			TriggerEvent('esx:spawnVehicle', "bmx")
+			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceBmx))
 		end
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
 	end
+	
+	
+	-- outfits
 	
 	if data.current.value == 'citizen_wear' then
 		ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)

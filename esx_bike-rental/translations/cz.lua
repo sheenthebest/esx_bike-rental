@@ -1,6 +1,6 @@
 Locales['cz'] = {
-	['press_e'] = 'Stiskni ~r~~h~E~h~~w~ a vypujci si kolo.',
-	['storebike'] = 'Stiskni ~r~~h~E~h~~w~ a vrat vypujcene kolo.',
+	['press_e'] = 'Stiskni ~INPUT_CONTEXT~ a vypujci si kolo.',
+	['storebike'] = 'Stiskni ~INPUT_CONTEXT~ a vrat vypujcene kolo.',
 	['biketitle'] = 'Pujcovna kol',
 	['bike'] = 'Kolo - <span style="color:green;">TriBike</span> <span style="color:red;">89$</span>',
 	['bike2'] = 'Kolo - <span style="color:green;">Scorcher</span> <span style="color:red;">99$</span>',
@@ -12,6 +12,8 @@ Locales['cz'] = {
 	['bike4free'] = 'Bike - <span style="color:green;">BMX</span>',
 	['bikemessage'] = 'Doufáme ,že jste si jízdu užil. Děkujeme přidte zas. :)',
 	['notabike'] = 'Nejsi na kole!',
+	
+	['bike_pay'] = 'Zaplatil jste: $%s',
 	
 	['bikes'] = '[Kola]',
 	

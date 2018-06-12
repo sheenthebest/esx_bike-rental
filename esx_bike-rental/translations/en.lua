@@ -1,6 +1,6 @@
 Locales['en'] = {
-	['press_e'] = 'Press ~r~~h~E~h~~w~ rent a bike.',
-	['storebike'] = 'Press ~r~~h~E~h~~w~ store bike back.',	
+	['press_e'] = 'Press ~INPUT_CONTEXT~ rent a bike.',
+	['storebike'] = 'Press ~INPUT_CONTEXT~ store bike back.',	
 	['biketitle'] = 'Bike Rental',
 	['bike'] = 'Bike - <span style="color:green;">TriBike</span> <span style="color:red;">89$</span>',
 	['bike2'] = 'Bike - <span style="color:green;">Scorcher</span> <span style="color:red;">99$</span>',
@@ -12,6 +12,8 @@ Locales['en'] = {
 	['bike4free'] = 'Bike - <span style="color:green;">BMX</span>',
 	['bikemessage'] = 'We hope you enjoyed the ride. Come back later. :)',
 	['notabike'] = 'You are not on the bike!',
+	
+	['bike_pay'] = 'You paid: $%s',
 	
 	['bikes'] = '[Bikes]',
 	
