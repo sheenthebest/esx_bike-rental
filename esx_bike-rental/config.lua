@@ -5,7 +5,7 @@ Config.Locale                     = 'cz'
 Config.Volume = 0.5 				-- 0.1 , 1.0
 Config.EnablePrice = true -- false = bikes for free
 Config.EnableEffects = true
-Config.EnableSoundEffects = false
+Config.EnableSoundEffects = false -- req. InteractSound 
 Config.EnableBlips = true
 
 	
