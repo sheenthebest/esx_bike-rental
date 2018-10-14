@@ -2,10 +2,8 @@ Config                            = {}
 Config.Locale                     = 'cz'
 
 
-Config.Volume = 0.5 				-- 0.1 , 1.0
 Config.EnablePrice = true -- false = bikes for free
 Config.EnableEffects = true
-Config.EnableSoundEffects = false -- req. InteractSound 
 Config.EnableBlips = true
 
 	
@@ -29,7 +27,7 @@ Config.MarkerZones = {
 -- Edit blip titles
 Config.BlipZones = { 
 
-   {title="Pujcovna kol", colour=2, id=376, x = -248.938, y = -339.955, z = 29.969},
-   {title="Pujcovna kol", colour=2, id=376, x = -6.892, y = -1081.734, z = 26.829},
-   {title="Pujcovna kol", colour=2, id=376, x = -1262.36, y = -1438.98, z = 3.45},
+   {title="Bikes Rental", colour=2, id=376, x = -248.938, y = -339.955, z = 29.969},
+   {title="Bikes Rental", colour=2, id=376, x = -6.892, y = -1081.734, z = 26.829},
+   {title="Bikes Rental", colour=2, id=376, x = -1262.36, y = -1438.98, z = 3.45},
 }

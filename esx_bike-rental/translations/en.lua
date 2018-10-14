@@ -17,8 +17,4 @@ Locales['en'] = {
 	
 	['bikes'] = '[Bikes]',
 	
-	['civil_outfit'] = '<span style="color:yellow;">Citizen Outfit</span>',
-	['outfit'] = '<span style="color:green;">Bike Outfit</span> <span style="color:red;">200$</span>',
-	['outfit2'] = '<span style="color:green;">Bike Outfit 2</span> <span style="color:red;">200$</span>',
-	['outfit3'] = '<span style="color:green;">Bike Outfit 3</span> <span style="color:red;">200$</span>',
 }

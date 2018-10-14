@@ -124,15 +124,6 @@ function OpenBikesMenu()
 	end
 	
 	
-	--- WIP 
-	if Config.EnableBuyOutfits then
-		table.insert(elements, {label = '--------------------------------------------------', value = 'spacer'}) 
-		table.insert(elements, {label = _U('civil_outfit'), value = 'citizen_wear'}) 
-		table.insert(elements, {label = _U('outfit'), value = 'outfit'}) 
-		table.insert(elements, {label = _U('outfit2'), value = 'outfit2'}) 
-		table.insert(elements, {label = _U('outfit3'), value = 'outfit3'}) 
-	end
-	
 	ESX.UI.Menu.CloseAll()
 
 	ESX.UI.Menu.Open(
@@ -147,11 +138,8 @@ function OpenBikesMenu()
 	function(data, menu)
 
 	if data.current.value == 'kolo' then
-		if Config.EnableSoundEffects == true then
-			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
-		end
 		if Config.EnablePrice then
-			TriggerServerEvent("esx:lowmoney", Config.PriceTriBike) 
+			TriggerServerEvent("esx:bike:lowmoney", Config.PriceTriBike) 
 		end
 		
 		if Config.EnableEffects then
@@ -170,11 +158,8 @@ function OpenBikesMenu()
 	end
 	
 	if data.current.value == 'kolo2' then
-		if Config.EnableSoundEffects == true then
-			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
-		end
 		if Config.EnablePrice then
-			TriggerServerEvent("esx:lowmoney", Config.PriceScorcher) 
+			TriggerServerEvent("esx:bike:lowmoney", Config.PriceScorcher) 
 		end
 		
 		if Config.EnableEffects then
@@ -193,11 +178,8 @@ function OpenBikesMenu()
 	end
 	
 	if data.current.value == 'kolo3' then
-		if Config.EnableSoundEffects == true then
-			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
-		end
 		if Config.EnablePrice then
-			TriggerServerEvent("esx:lowmoney", Config.PriceCruiser) 
+			TriggerServerEvent("esx:bike:lowmoney", Config.PriceCruiser) 
 		end
 		
 		if Config.EnableEffects then
@@ -215,11 +197,8 @@ function OpenBikesMenu()
 	end
 	
 	if data.current.value == 'kolo4' then
-		if Config.EnableSoundEffects == true then
-			TriggerServerEvent('InteractSound_SV:PlayOnSource', 'buy', Config.Volume)
-		end
 		if Config.EnablePrice then
-			TriggerServerEvent("esx:lowmoney", Config.PriceBmx) 
+			TriggerServerEvent("esx:bike:lowmoney", Config.PriceBmx) 
 		end
 		
 		if Config.EnableEffects then
@@ -236,58 +215,6 @@ function OpenBikesMenu()
 		havebike = true	
 	end
 	
-	
-	-- outfits
-	
-	if data.current.value == 'citizen_wear' then
-		ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
-			TriggerEvent('skinchanger:loadSkin', skin)
-		end)
-	end
-	
-	if data.current.value == 'outfit' then
-        TriggerEvent('skinchanger:getSkin', function(skin)
-        
-            if skin.sex == 0 then
-
-                local clothesSkin = {
-					['tshirt_1'] = 0, ['tshirt_2'] = 0,
-                    ['torso_1'] = 0, ['torso_2'] = 0,
-                    ['decals_1'] = 0, ['decals_2'] = 0,
-                    ['arms'] = 0,
-                    ['pants_1'] = 0, ['pants_2'] = 0,
-                    ['shoes_1'] = 0, ['shoes_2'] = 0,
-                    ['helmet_1'] = -1, ['helmet_2'] = 0,
-                    ['chain_1'] = 0, ['chain_2'] = 0,
-                    ['ears_1'] = -1, ['ears_2'] = -1
-                }
-                TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
-
-            else
-
-                local clothesSkin = {
-                    ['tshirt_1'] = 0, ['tshirt_2'] = 0,
-                    ['torso_1'] = 0, ['torso_2'] = 0,
-                    ['decals_1'] = 0, ['decals_2'] = 0,
-                    ['arms'] = 0,
-                    ['pants_1'] = 0, ['pants_2'] = 0,
-                    ['shoes_1'] = 0, ['shoes_2'] = 0,
-                    ['helmet_1'] = 0, ['helmet_2'] = 0,
-                    ['chain_1'] = 0, ['chain_2'] = 0,
-                    ['ears_1'] = -1, ['ears_2'] = -1
-                }
-                TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
-
-            end
-
-            local playerPed = GetPlayerPed(-1)
-            ClearPedBloodDamage(playerPed)
-            ResetPedVisibleDamage(playerPed)
-            ClearPedLastWeaponDamage(playerPed)
-            
-        end)
-      end
-	
 
     end,
 	function(data, menu)
@@ -295,11 +222,3 @@ function OpenBikesMenu()
 		end
 	)
 end
-
-RegisterNetEvent('xyz:clientsaver')
-AddEventHandler('xyz:clientsaver', function()
-	x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-	local PlayerName = GetPlayerName(PlayerId())
-	--DisplayBottomLeft("Coords [x]:"..x..", [y]:"..y..", [z]:"..z)
-	TriggerServerEvent("xyz:saver", PlayerName, x , y , z)
-end)
