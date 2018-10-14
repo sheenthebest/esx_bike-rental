@@ -61,14 +61,16 @@ Citizen.CreateThread(function()
             local distance = Vdist(pedcoords.x, pedcoords.y, pedcoords.z, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z)
             if distance <= 1.40 then
 				if havebike then
-					AddTextEntry("FREE_BIKE", _U('press_e'))
-					DisplayHelpTextThisFrame("FREE_BIKE",false )
+					AddTextEntry("RENT_BIKE", _U('press_e'))
+					DisplayHelpTextThisFrame("RENT_BIKE",false)
+					
 					if IsControlJustPressed(0, Keys['E']) and IsPedOnFoot(ped) then
 						OpenBikesMenu()
 					end 
 				elseif not havebike then
-					AddTextEntry("FREE_BIKE", _U('storebike')) 
-					DisplayHelpTextThisFrame("FREE_BIKE",false )
+					AddTextEntry("STORE_BIKE", _U('storebike')) 
+					DisplayHelpTextThisFrame("STORE_BIKE",false)
+
 					if IsControlJustPressed(0, Keys['E']) then
 						if IsPedOnAnyBike(PlayerPedId()) then
 							Citizen.Wait(100) 
