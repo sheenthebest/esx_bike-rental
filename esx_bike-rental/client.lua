@@ -54,19 +54,19 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
+        local ped = PlayerPedId()
 	
         for k in pairs(Config.MarkerZones) do
-            local plyCoords = GetEntityCoords(GetPlayerPed(-1), false)
-            local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z)
-            if dist <= 1.40 then
-				if havebike == false then
+            local pedcoords = GetEntityCoords(ped, false)
+            local distance = Vdist(pedcoords.x, pedcoords.y, pedcoords.z, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z)
+            if distance <= 1.40 then
+				if havebike then
 					AddTextEntry("FREE_BIKE", _U('press_e'))
 					DisplayHelpTextThisFrame("FREE_BIKE",false )
-					if IsControlJustPressed(0, Keys['E']) and IsPedOnFoot(PlayerPedId()) then
-						Citizen.Wait(100)  
+					if IsControlJustPressed(0, Keys['E']) and IsPedOnFoot(ped) then
 						OpenBikesMenu()
 					end 
-				elseif havebike == true then
+				elseif not havebike then
 					AddTextEntry("FREE_BIKE", _U('storebike')) 
 					DisplayHelpTextThisFrame("FREE_BIKE",false )
 					if IsControlJustPressed(0, Keys['E']) then
@@ -96,7 +96,7 @@ Citizen.CreateThread(function()
 						end
 					end 		
 				end
-			elseif dist < 1.45 then
+			elseif distance < 1.45 then
 				ESX.UI.Menu.CloseAll()
             end
         end
@@ -140,6 +140,7 @@ function OpenBikesMenu()
 	if data.current.value == 'kolo' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceTriBike) 
+			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceTriBike))
 		end
 		
 		if Config.EnableEffects then
@@ -147,10 +148,8 @@ function OpenBikesMenu()
 			Citizen.Wait(1000)
 			TriggerEvent('esx:spawnVehicle', "tribike2")
 			DoScreenFadeIn(3000) 
-			ESX.ShowNotification(_U('bike_pay', Config.PriceTriBike))
 		else
 			TriggerEvent('esx:spawnVehicle', "tribike2")
-			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceTriBike))
 		end
 		
 		ESX.UI.Menu.CloseAll()
@@ -160,6 +159,7 @@ function OpenBikesMenu()
 	if data.current.value == 'kolo2' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceScorcher) 
+			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceScorcher))
 		end
 		
 		if Config.EnableEffects then
@@ -167,10 +167,8 @@ function OpenBikesMenu()
 			Citizen.Wait(1000)
 			TriggerEvent('esx:spawnVehicle', "scorcher")
 			DoScreenFadeIn(3000) 
-			ESX.ShowNotification(_U('bike_pay', Config.PriceScorcher))
 		else
 			TriggerEvent('esx:spawnVehicle', "scorcher")
-			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceScorcher))
 		end
 		
 		ESX.UI.Menu.CloseAll()
@@ -180,6 +178,7 @@ function OpenBikesMenu()
 	if data.current.value == 'kolo3' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceCruiser) 
+			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceCruiser))
 		end
 		
 		if Config.EnableEffects then
@@ -187,10 +186,8 @@ function OpenBikesMenu()
 			Citizen.Wait(1000)
 			TriggerEvent('esx:spawnVehicle', "cruiser")
 			DoScreenFadeIn(3000) 
-			ESX.ShowNotification(_U('bike_pay', Config.PriceCruiser))
 		else
 			TriggerEvent('esx:spawnVehicle', "cruiser")
-			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceCruiser))
 		end
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
@@ -199,6 +196,7 @@ function OpenBikesMenu()
 	if data.current.value == 'kolo4' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceBmx) 
+			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceBmx))
 		end
 		
 		if Config.EnableEffects then
@@ -206,10 +204,8 @@ function OpenBikesMenu()
 			Citizen.Wait(1000)
 			TriggerEvent('esx:spawnVehicle', "bmx")
 			DoScreenFadeIn(3000) 
-			ESX.ShowNotification(_U('bike_pay', Config.PriceBmx))
 		else
 			TriggerEvent('esx:spawnVehicle', "bmx")
-			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceBmx))
 		end
 		ESX.UI.Menu.CloseAll()
 		havebike = true	
