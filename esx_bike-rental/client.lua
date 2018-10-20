@@ -54,20 +54,20 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        local ped = PlayerPedId()
 	
         for k in pairs(Config.MarkerZones) do
+        	local ped = PlayerPedId()
             local pedcoords = GetEntityCoords(ped, false)
             local distance = Vdist(pedcoords.x, pedcoords.y, pedcoords.z, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z)
             if distance <= 1.40 then
-				if havebike then
+				if havebike == false then
 					AddTextEntry("RENT_BIKE", _U('press_e'))
 					DisplayHelpTextThisFrame("RENT_BIKE",false)
 					
 					if IsControlJustPressed(0, Keys['E']) and IsPedOnFoot(ped) then
 						OpenBikesMenu()
 					end 
-				elseif not havebike then
+				elseif havebike == true then
 					AddTextEntry("STORE_BIKE", _U('storebike')) 
 					DisplayHelpTextThisFrame("STORE_BIKE",false)
 
@@ -153,9 +153,6 @@ function OpenBikesMenu()
 		else
 			TriggerEvent('esx:spawnVehicle', "tribike2")
 		end
-		
-		ESX.UI.Menu.CloseAll()
-		havebike = true	
 	end
 	
 	if data.current.value == 'kolo2' then
@@ -173,8 +170,6 @@ function OpenBikesMenu()
 			TriggerEvent('esx:spawnVehicle', "scorcher")
 		end
 		
-		ESX.UI.Menu.CloseAll()
-		havebike = true	
 	end
 	
 	if data.current.value == 'kolo3' then
@@ -191,8 +186,6 @@ function OpenBikesMenu()
 		else
 			TriggerEvent('esx:spawnVehicle', "cruiser")
 		end
-		ESX.UI.Menu.CloseAll()
-		havebike = true	
 	end
 	
 	if data.current.value == 'kolo4' then
@@ -209,9 +202,10 @@ function OpenBikesMenu()
 		else
 			TriggerEvent('esx:spawnVehicle', "bmx")
 		end
-		ESX.UI.Menu.CloseAll()
-		havebike = true	
 	end
+
+	ESX.UI.Menu.CloseAll()
+	havebike = true	
 	
 
     end,
