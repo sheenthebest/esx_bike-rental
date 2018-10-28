@@ -1,5 +1,5 @@
 Config                            = {}
-Config.Locale                     = 'cz'
+Config.Locale                     = 'en'
 
 
 Config.EnablePrice = true -- false = bikes for free
@@ -13,6 +13,11 @@ Config.PriceCruiser = 129
 Config.PriceBmx = 109
 
 Config.EnableBuyOutfits = false -- WIP !!!!
+
+
+Config.TypeMarker = 27
+Config.MarkerScale = {{x = 2.000,y = 2.000,z = 0.500}}
+Config.MarkerColor = {{r = 0,g = 255,b = 255}}
 	
 Config.MarkerZones = { 
 

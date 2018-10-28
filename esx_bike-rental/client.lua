@@ -44,8 +44,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         for k in pairs(Config.MarkerZones) do
-            DrawMarker(27, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z, 0, 0, 0, 0, 0, 0, 2.001, 2.0001, 0.501, 0, 255, 255, 100, 0, 0, 0, 0)
-			
+            DrawMarker(Config.TypeMarker, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z, 0, 0, 0, 0, 0, 0, Config.MarkerScale.x, Config.MarkerScale.y, Config.MarkerScale.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, 0, 0, 0, 0)	
 		end
     end
 end)
@@ -61,40 +60,31 @@ Citizen.CreateThread(function()
             local distance = Vdist(pedcoords.x, pedcoords.y, pedcoords.z, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z)
             if distance <= 1.40 then
 				if havebike == false then
-					AddTextEntry("RENT_BIKE", _U('press_e'))
-					DisplayHelpTextThisFrame("RENT_BIKE",false)
+
+					helptext(_U('press_e'))
 					
 					if IsControlJustPressed(0, Keys['E']) and IsPedOnFoot(ped) then
 						OpenBikesMenu()
 					end 
 				elseif havebike == true then
-					AddTextEntry("STORE_BIKE", _U('storebike')) 
-					DisplayHelpTextThisFrame("STORE_BIKE",false)
 
-					if IsControlJustPressed(0, Keys['E']) then
-						if IsPedOnAnyBike(PlayerPedId()) then
-							Citizen.Wait(100) 
-							if Config.EnableEffects then
-								DoScreenFadeOut(1000)
-								Citizen.Wait(500)
-								TriggerEvent('esx:deleteVehicle')
-								DoScreenFadeIn(3000) 
-							else
-								TriggerEvent('esx:deleteVehicle')
-							end
-							
-							if Config.EnableEffects then
-								ESX.ShowNotification(_U('bikemessage'))
-							else
-								TriggerEvent("chatMessage", _U('bikes'), {255,255,0}, _U('bikemessage'))
-							end
-							havebike = false
+					helptext(_U('storebike'))
+
+					if IsControlJustPressed(0, Keys['E']) and IsPedOnAnyBike(ped) then
+
+						TriggerEvent('esx:deleteVehicle')
+					
+						if Config.EnableEffects then
+							ESX.ShowNotification(_U('bikemessage'))
 						else
-							if Config.EnableEffects then
-								ESX.ShowNotification(_U('notabike'))
-							else
-								TriggerEvent("chatMessage", _U('bikes'), {255,255,0}, _U('notabike'))
-							end
+							TriggerEvent("chatMessage", _U('bikes'), {255,255,0}, _U('bikemessage'))
+						end
+						havebike = false
+					else
+						if Config.EnableEffects then
+							ESX.ShowNotification(_U('notabike'))
+						else
+							TriggerEvent("chatMessage", _U('bikes'), {255,255,0}, _U('notabike'))
 						end
 					end 		
 				end
@@ -112,17 +102,17 @@ function OpenBikesMenu()
 	local elements = {}
 	
 	if Config.EnablePrice == false then
-		table.insert(elements, {label = _U('bikefree'), value = 'kolo'}) 
-		table.insert(elements, {label = _U('bike2free'), value = 'kolo2'}) 
-		table.insert(elements, {label = _U('bike3free'), value = 'kolo3'}) 
-		table.insert(elements, {label = _U('bike4free'), value = 'kolo4'}) 
+		table.insert(elements, {label = _U('bikefree'), value = 'bike'}) 
+		table.insert(elements, {label = _U('bike2free'), value = 'bike2'}) 
+		table.insert(elements, {label = _U('bike3free'), value = 'bike3'}) 
+		table.insert(elements, {label = _U('bike4free'), value = 'bike4'}) 
 	end
 	
 	if Config.EnablePrice == true then
-		table.insert(elements, {label = _U('bike'), value = 'kolo'}) 
-		table.insert(elements, {label = _U('bike2'), value = 'kolo2'}) 
-		table.insert(elements, {label = _U('bike3'), value = 'kolo3'}) 
-		table.insert(elements, {label = _U('bike4'), value = 'kolo4'}) 
+		table.insert(elements, {label = _U('bike'), value = 'bike'}) 
+		table.insert(elements, {label = _U('bike2'), value = 'bike2'}) 
+		table.insert(elements, {label = _U('bike3'), value = 'bike3'}) 
+		table.insert(elements, {label = _U('bike4'), value = 'bike4'}) 
 	end
 	
 	
@@ -139,66 +129,54 @@ function OpenBikesMenu()
 	
 	function(data, menu)
 
-	if data.current.value == 'kolo' then
+	if data.current.value == 'bike' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceTriBike) 
 			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceTriBike))
 		end
 		
 		if Config.EnableEffects then
-			DoScreenFadeOut(1000)
-			Citizen.Wait(1000)
-			TriggerEvent('esx:spawnVehicle', "tribike2")
-			DoScreenFadeIn(3000) 
+			spawn_effect("tribike2")
 		else
 			TriggerEvent('esx:spawnVehicle', "tribike2")
 		end
 	end
 	
-	if data.current.value == 'kolo2' then
+	if data.current.value == 'bike2' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceScorcher) 
 			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceScorcher))
 		end
 		
 		if Config.EnableEffects then
-			DoScreenFadeOut(1000)
-			Citizen.Wait(1000)
-			TriggerEvent('esx:spawnVehicle', "scorcher")
-			DoScreenFadeIn(3000) 
+			spawn_effect("scorcher")
 		else
 			TriggerEvent('esx:spawnVehicle', "scorcher")
 		end
 		
 	end
 	
-	if data.current.value == 'kolo3' then
+	if data.current.value == 'bike3' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceCruiser) 
 			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceCruiser))
 		end
 		
 		if Config.EnableEffects then
-			DoScreenFadeOut(1000)
-			Citizen.Wait(1000)
-			TriggerEvent('esx:spawnVehicle', "cruiser")
-			DoScreenFadeIn(3000) 
+			spawn_effect("cruiser")
 		else
 			TriggerEvent('esx:spawnVehicle', "cruiser")
 		end
 	end
 	
-	if data.current.value == 'kolo4' then
+	if data.current.value == 'bike4' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceBmx) 
 			TriggerEvent("chatMessage", _U('bikes'), {255,0,255}, _U('bike_pay', Config.PriceBmx))
 		end
 		
 		if Config.EnableEffects then
-			DoScreenFadeOut(1000)
-			Citizen.Wait(1000)
-			TriggerEvent('esx:spawnVehicle', "bmx")
-			DoScreenFadeIn(3000) 
+			spawn_effect("bmx")
 		else
 			TriggerEvent('esx:spawnVehicle', "bmx")
 		end
@@ -213,4 +191,18 @@ function OpenBikesMenu()
 		menu.close()
 		end
 	)
+end
+
+
+function helptext(text)
+	SetTextComponentFormat('STRING')
+	AddTextComponentString(text)
+	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+end
+
+function spawn_effect(somecar) 
+	DoScreenFadeOut(1000)
+	Citizen.Wait(1000)
+	TriggerEvent('esx:spawnVehicle', somecar)
+	DoScreenFadeIn(3000) 
 end
