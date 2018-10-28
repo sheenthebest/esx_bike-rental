@@ -16,6 +16,7 @@ client_scripts {
   '@es_extended/locale.lua',
   'translations/en.lua',
   'translations/cz.lua',
+  'warmenu.lua',
   'config.lua',
   'client.lua'
 }
