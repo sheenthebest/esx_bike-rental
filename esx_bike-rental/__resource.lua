@@ -7,7 +7,7 @@
 
 resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
-version '4.2'
+version '5.0'
 
 description 'Esx Bike Rental by sheen - thx for base Woopi/Lucas Miller'
 
@@ -16,7 +16,7 @@ client_scripts {
   '@es_extended/locale.lua',
   'translations/en.lua',
   'translations/cz.lua',
-  'warmenu.lua',
+  --'warmenu.lua',
   'config.lua',
   'client.lua'
 }
