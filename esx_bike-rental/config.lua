@@ -1,20 +1,20 @@
 Config                            = {}
 Config.Locale                     = 'en'
 
-
+--- #### BASICS
 Config.EnablePrice = true -- false = bikes for free
 Config.EnableEffects = true
 Config.EnableBlips = true
 
-	
+
+--- #### PRICES	
 Config.PriceTriBike = 89
 Config.PriceScorcher = 99
 Config.PriceCruiser = 129
 Config.PriceBmx = 109
 
-Config.EnableBuyOutfits = false -- WIP !!!!
 
-
+--- #### MARKER EDITS
 Config.TypeMarker = 27
 Config.MarkerScale = {{x = 2.000,y = 2.000,z = 0.500}}
 Config.MarkerColor = {{r = 0,g = 255,b = 255}}
