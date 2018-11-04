@@ -44,7 +44,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         for k in pairs(Config.MarkerZones) do
-            DrawMarker(Config.TypeMarker, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z, 0, 0, 0, 0, 0, 0, Config.MarkerScale.x, Config.MarkerScale.y, Config.MarkerScale.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, 0, 0, 0, 0)	
+            DrawMarker(Config.TypeMarker, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z, 0, 0, 0, 0, 0, 0, Config.MarkerScale[k].x, Config.MarkerScale[k].y, Config.MarkerScale[k].z, Config.MarkerColor[k].r, Config.MarkerColor[k].g, Config.MarkerColor[k].b, 100, 0, 0, 0, 0)	
 		end
     end
 end)
