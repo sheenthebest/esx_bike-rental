@@ -3,7 +3,7 @@ Config.Locale                     = 'en'
 
 --- #### BASICS
 Config.EnablePrice = true -- false = bikes for free
-Config.EnableEffects = true
+Config.EnableEffects = false
 Config.EnableBlips = true
 
 
