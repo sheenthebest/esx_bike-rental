@@ -16,8 +16,8 @@ Config.PriceBmx = 109
 
 --- #### MARKER EDITS
 Config.TypeMarker = 27
-Config.MarkerScale = {{x = 2.000,y = 2.000,z = 0.500}}
-Config.MarkerColor = {{r = 0,g = 255,b = 255}}
+Config.MarkerScale = { x = 2.000, y = 2.000, z = 0.500}
+Config.MarkerColor = { r = 0, g = 255, b = 255}
 	
 Config.MarkerZones = { 
 
