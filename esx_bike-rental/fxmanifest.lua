@@ -5,7 +5,8 @@
  of this license document, but changing it is not allowed.
 ]]
 
-resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
+fx_version 'bodacious'
+game 'gta5'
 
 version '5.0'
 
